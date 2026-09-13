@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Morgan | Junior Web Developer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar container">
+      <a href="#home" class="logo">Alex<span>.dev</span></a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="theme-btn" class="icon-btn" title="Toggle Theme" aria-label="Toggle Theme">🌙</button>
+        <button id="menu-btn" class="icon-btn menu-toggle" title="Toggle Menu" aria-label="Toggle Menu">☰</button>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="home" class="hero section">
+      <div class="container hero-content">
+        <span class="badge">👋 Hello & Welcome</span>
+        <h1 class="hero-title">Hi, I'm <span class="highlight">Alex Morgan</span></h1>
+        <p class="hero-desc">A passionate beginner web developer creating interactive, responsive websites.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="about section">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+          <div class="card">
+            <h3>My Journey</h3>
+            <p>I started learning web development with a curiosity for how websites work. I love learning new tools.</p>
+          </div>
+          <div class="card">
+            <h3>Current Focus</h3>
+            <p>Mastering HTML, CSS layout systems, modern JavaScript ES6+, and building beginner-friendly projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="skills" class="skills section bg-alt">
+      <div class="container">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript ES6</span>
+          <span class="skill-tag">Responsive UI</span>
+          <span class="skill-tag">Git & GitHub</span>
+          <span class="skill-tag">VS Code</span>
+        </div>
+      </div>
+    </section>
+    <section id="projects" class="projects section">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="filter-container">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="web">Websites</button>
+          <button class="filter-btn" data-category="tool">Tools</button>
+        </div>
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </section>
+    <section id="contact" class="contact section bg-alt">
+      <div class="container form-wrapper">
+        <h2 class="section-title">Contact Me</h2>
+        <form id="contact-form" class="contact-form">
+          <input type="text" id="name" placeholder="Your Name" required>
+          <input type="email" id="email" placeholder="Your Email" required>
+          <textarea id="message" rows="3" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+          <p id="form-msg" class="form-msg"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-box">
+      <p>&copy; 2026 Alex Morgan. Built with HTML, CSS, and JavaScript.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
