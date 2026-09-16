@@ -1,670 +1,737 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =====================================================================
+       METADATA & SEO SETTINGS
+       Viva Explanation:
+       - meta charset="UTF-8": Specifies character encoding (supports emojis, symbols).
+       - meta viewport: Crucial for mobile responsiveness; instructs mobile browsers
+         to render the page width to the device's physical screen width.
+       - title & description: Standard SEO tags displayed in Google search results.
+       ===================================================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-  <meta name="description" content="Personal Developer Portfolio of Dhruv Gupta - 1st Year B.Tech Computer Science & Engineering Student with embedded interactive mini-project.">
-  <meta name="keywords" content="Dhruv Gupta, B.Tech CSE, Portfolio, Web Development, C, C++, JavaScript, Expense Tracker">
+  <meta name="description" content="Dhruv Gupta - 1st-Year B.Tech Computer Science & Engineering student portfolio featuring web projects, C/C++ coursework, and an interactive embedded Personal Expense Tracker mini-project.">
   <meta name="author" content="Dhruv Gupta">
-  <title>Dhruv Gupta | 1st Year B.Tech CSE & Developer Portfolio</title>
+  <meta name="theme-color" content="#0a0e14">
+  <title>Dhruv Gupta | 1st-Year B.Tech CSE Portfolio</title>
 
-  <!-- Google Fonts: Outfit (Headings), Inter (Body), JetBrains Mono (Code) -->
-=======
-  <title>Dhruv Gupta | Junior Web Developer</title>
-  <link rel="stylesheet" href="style.css">
->>>>>>> 19e46291b53562c9d87ab87af55d716b11692ed8
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Google Fonts: JetBrains Mono (Code/Terminal font) and Inter (Clean body font) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Core Portfolio Stylesheet -->
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Embedded Mini-Project Stylesheet -->
-  <link rel="stylesheet" href="css/project.css">
 </head>
 <body>
-<<<<<<< HEAD
 
-  <!-- =========================================================================
+  <!-- =====================================================================
        NAVIGATION BAR
-       Viva Tip: <header> and <nav> are HTML5 semantic tags that tell search engines
-       and screen-readers where the top navigation landmark lives.
-       ========================================================================= -->
-  <header class="navbar" id="navbar">
+       Viva Explanation:
+       - Semantic <header> and <nav> tags improve document accessibility.
+       - Fixed/sticky bar containing terminal prompt logo, status badge, and anchor links.
+       ===================================================================== -->
+  <header class="terminal-nav">
     <div class="nav-container">
-      <a href="#hero" class="nav-brand" aria-label="Dhruv Gupta Home">
-        <span class="brand-bracket">&lt;</span>Dhruv.dev<span class="brand-bracket"> /&gt;</span>
+      <a href="#home" class="nav-logo" id="nav-brand-logo" aria-label="Dhruv Gupta Portfolio Home">
+        <span class="prompt-symbol">dhruv@cse:~$</span>
+        <span class="nav-status">
+          <span class="status-dot"></span>
+          <span>SYSTEM ONLINE</span>
+        </span>
       </a>
 
-      <!-- Mobile Navigation Hamburger Toggle Button -->
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
-        ☰
+      <!-- Mobile Hamburger Menu Button -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation Menu">
+        [=] Menu
       </button>
 
-      <!-- Navigation Links -->
-      <nav>
-        <ul class="nav-links" id="nav-links">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects &amp; Mini-App</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-          <li>
-            <a href="#projects" class="btn btn-primary btn-sm" style="font-family: var(--font-body); font-size: 0.85rem;">
-              ⚡ Live Mini-App
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-=======
-  <header class="header">
-    <nav class="navbar container">
-      <a href="#home" class="logo">Dhruv<span>.Gupta</span></a>
-      <ul class="nav-menu" id="nav-menu">
-        <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+      <!-- Navigation Anchor Links -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link active" id="nav-link-home"><span>01.</span>//home</a></li>
+        <li><a href="#about" class="nav-link" id="nav-link-about"><span>02.</span>//about</a></li>
+        <li><a href="#skills" class="nav-link" id="nav-link-skills"><span>03.</span>//skills</a></li>
+        <li><a href="#projects" class="nav-link" id="nav-link-projects"><span>04.</span>//projects</a></li>
+        <li><a href="#contact" class="nav-link" id="nav-link-contact"><span>05.</span>//contact</a></li>
       </ul>
-      <div class="nav-actions">
-        <button id="theme-btn" class="icon-btn" title="Toggle Theme" aria-label="Toggle Theme">🌙</button>
-        <button id="menu-btn" class="icon-btn menu-toggle" title="Toggle Menu" aria-label="Toggle Menu">☰</button>
-      </div>
-    </nav>
->>>>>>> 19e46291b53562c9d87ab87af55d716b11692ed8
+    </div>
   </header>
 
+  <!-- =====================================================================
+       MAIN CONTENT CONTAINER
+       Viva Explanation:
+       - The <main> element indicates the primary content of the document.
+       - Each major topic is encapsulated in a semantic <section> tag with unique id.
+       ===================================================================== -->
   <main>
-<<<<<<< HEAD
-    <!-- =======================================================================
+
+    <!-- -------------------------------------------------------------------
          1. HERO SECTION
-         Viva Tip: The primary <h1> tag is reserved for the most important heading
-         on the page for SEO hierarchy.
-         ======================================================================= -->
-    <section id="hero" class="hero-section">
-      <div class="hero-content">
-        <!-- Live Academic Status Pill -->
-        <div class="status-badge">
-          <span class="pulse-dot"></span>
-          <span>1st Year B.Tech CSE Student • Web Dev Milestone</span>
-        </div>
+         Viva Explanation:
+         - Features animated typing effect executed by JavaScript.
+         - Call-to-action buttons for direct navigation.
+         - Terminal diagnostic card showing academic credentials.
+         ------------------------------------------------------------------- -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
 
-        <h1 class="hero-title">
-          Hi, I'm <span class="gradient-text">Dhruv Gupta</span>
-        </h1>
-
-        <!-- CSS/JS Dynamic Typing Effect -->
-        <div class="hero-typing-wrapper">
-          <span>&gt;&nbsp;</span>
-          <span id="typing-text"></span>
-          <span class="typing-cursor">|</span>
-        </div>
-
-        <p class="hero-description">
-          First-year Computer Science &amp; Engineering undergraduate blending low-level foundational logic (C/C++) with responsive, interactive web engineering. Welcome to my web development assignment portfolio!
-        </p>
-
-        <div class="hero-cta-group">
-          <a href="#projects" class="btn btn-primary" id="btn-hero-work">
-            <span>Explore Interactive Project</span>
-            <span>↓</span>
-          </a>
-          <a href="#contact" class="btn btn-secondary" id="btn-hero-contact">
-            <span>Get in Touch</span>
-          </a>
-=======
-    <section id="home" class="hero section">
-      <div class="container hero-content">
-        <span class="badge">👋 Hello & Welcome</span>
-        <h1 class="hero-title">Hi, I'm <span class="highlight">Dhruv Gupta</span></h1>
-        <p class="hero-desc">A passionate beginner web developer creating interactive, responsive websites.</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-outline">Get In Touch</a>
->>>>>>> 19e46291b53562c9d87ab87af55d716b11692ed8
-        </div>
-      </div>
-
-      <!-- Hero Visual Terminal Card -->
-      <div class="hero-visual">
-        <div class="terminal-card">
-          <div class="terminal-header">
-            <div class="terminal-dots">
-              <span class="dot dot-red"></span>
-              <span class="dot dot-yellow"></span>
-              <span class="dot dot-green"></span>
+          <!-- Left Column: Command prompt, headline, typing effect, CTA buttons -->
+          <div class="hero-content">
+            <div class="hero-command-prompt">
+              <span class="user">dhruv@cse-terminal</span>:<span class="path">~</span>$ <span class="cmd">./introduce_myself.sh</span>
             </div>
-            <span class="terminal-title">dhruv@btech-cse: ~/portfolio</span>
+
+            <h1 class="hero-title">
+              Hello World, I'm <br>
+              <span class="highlight-name">Dhruv Gupta</span>
+            </h1>
+
+            <!-- Typing effect handled by js/main.js -->
+            <div class="typing-container" aria-live="polite">
+              <span class="typing-prefix">&gt; </span>
+              <span class="typed-text" id="typed-text"></span>
+              <span class="cursor" aria-hidden="true">_</span>
+            </div>
+
+            <p class="hero-description">
+              First-year B.Tech student specializing in <strong>Computer Science &amp; Engineering</strong>. 
+              Bridging the gap between low-level system logic in C/C++ and responsive, interactive interfaces built with modern web technologies.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary" id="btn-hero-projects">
+                <span>[ ./view-projects.sh ]</span>
+              </a>
+              <a href="#contact" class="btn btn-secondary" id="btn-hero-contact">
+                <span>[ ./contact-me.sh ]</span>
+              </a>
+            </div>
           </div>
-          <div class="terminal-body">
-            <p><span class="t-prompt">$</span> <span class="t-cmd">whoami</span></p>
-            <p><span class="t-key">Name:</span> <span class="t-val">"Dhruv Gupta"</span></p>
-            <p><span class="t-key">Role:</span> <span class="t-val">"1st Year B.Tech CSE"</span></p>
-            <p><span class="t-key">Interests:</span> <span class="t-val">["DSA in C++", "Web Systems", "Clean Code"]</span></p>
-            <br>
-            <p><span class="t-prompt">$</span> <span class="t-cmd">cat status.log</span></p>
-            <p class="t-comment">// Assignment status: 100% Complete &amp; Viva Ready</p>
-            <p class="t-val">✔ Embedded Mini-Project: ACTIVE</p>
-            <p class="t-val">✔ HTML/CSS/JS: 100% Vanilla</p>
-            
-            <img src="assets/avatar.svg" alt="Dhruv Developer Avatar" class="avatar-preview">
+
+          <!-- Right Column: Terminal Window Diagnostic Card -->
+          <div class="hero-terminal-side">
+            <div class="terminal-window">
+              <div class="window-header">
+                <div class="window-controls">
+                  <span class="control-dot close"></span>
+                  <span class="control-dot minimize"></span>
+                  <span class="control-dot maximize"></span>
+                </div>
+                <span class="window-title">dhruv_specs.json</span>
+                <span class="window-badge">bash 5.2</span>
+              </div>
+              <div class="window-body">
+                <div class="sys-info-row">
+                  <span class="sys-label">STUDENT_NAME:</span>
+                  <span class="sys-value">Dhruv Gupta</span>
+                </div>
+                <div class="sys-info-row">
+                  <span class="sys-label">ACADEMIC_PROGRAM:</span>
+                  <span class="sys-value">B.Tech in CSE</span>
+                </div>
+                <div class="sys-info-row">
+                  <span class="sys-label">CURRENT_LEVEL:</span>
+                  <span class="sys-value cyan">1st Year (Freshman)</span>
+                </div>
+                <div class="sys-info-row">
+                  <span class="sys-label">CORE_FOCUS:</span>
+                  <span class="sys-value">Data Structures &amp; Web</span>
+                </div>
+                <div class="sys-info-row">
+                  <span class="sys-label">DEV_ENVIRONMENT:</span>
+                  <span class="sys-value">VS Code / GCC / Git</span>
+                </div>
+                <div class="sys-info-row">
+                  <span class="sys-label">HOST_SYSTEM:</span>
+                  <span class="sys-value cyan">Windows 11 / Linux Subsystem</span>
+                </div>
+                <div class="sys-info-row">
+                  <span class="sys-label">ACADEMIC_STATUS:</span>
+                  <span class="sys-value">In Good Standing [100%]</span>
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
 
-    <!-- =======================================================================
+    <!-- -------------------------------------------------------------------
          2. ABOUT ME SECTION
-         Viva Tip: Semantic <section> grouping with introductory overlines.
-         ======================================================================= -->
-    <section id="about" class="section-container">
-      <div class="section-header">
-        <span class="section-tag">// 01. ABOUT ME</span>
-        <h2 class="section-title">Foundations Built Right</h2>
-        <p class="section-subtitle">
-          From binary fundamentals and C pointers to browser rendering engines.
-        </p>
-      </div>
+         Viva Explanation:
+         - Details academic standing as a 1st-year student.
+         - Highlights foundational engineering skills, mindset, and coursework.
+         ------------------------------------------------------------------- -->
+    <section id="about" class="section-padding">
+      <div class="container">
+        
+        <header class="section-header">
+          <div class="section-command">
+            <span class="prompt-symbol">$</span>
+            <span>cat /usr/dhruv/about_me.txt</span>
+          </div>
+          <h2 class="section-title">02. About Me</h2>
+          <p class="section-subtitle">// Academic background, engineering philosophy, and current coursework</p>
+        </header>
 
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            I am a <strong>1st-year Bachelor of Technology (B.Tech) student in Computer Science &amp; Engineering</strong>. My engineering journey began with the belief that exceptional developers must deeply understand both the low-level machine architecture and high-level user interfaces.
-          </p>
-          <p>
-            In my university coursework, I spend my time breaking down algorithms in <strong>C and C++</strong>, understanding memory allocation (pointers, structs, stack vs heap), and crafting clean, accessible user interfaces using <strong>pure semantic HTML5, modern CSS, and ES6+ JavaScript</strong>.
-          </p>
-          <p>
-            Rather than jumping straight to heavy bloated frameworks, I chose to build this complete portfolio and embedded interactive application from scratch using <strong>pure Vanilla web technologies</strong> so I can defend every single line during my academic viva.
-          </p>
-
-          <div style="margin-top: 10px;">
-            <a href="#skills" class="btn btn-secondary btn-sm">Check My Tech Stack →</a>
-          </div>
-        </div>
-
-        <div class="highlight-cards">
-          <div class="highlight-card">
-            <div class="highlight-icon">🎓</div>
-            <h3 class="highlight-title">1st Year Engineering</h3>
-            <p class="highlight-desc">Undergraduate B.Tech CSE student focused on core computing fundamentals and logic building.</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-icon">💻</div>
-            <h3 class="highlight-title">Hands-On Practice</h3>
-            <p class="highlight-desc">Building functional lab assignments, command-line utilities, and real web applications.</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-icon">⚡</div>
-            <h3 class="highlight-title">Zero Bloat Mentality</h3>
-            <p class="highlight-desc">Mastering Vanilla JS, the Document Object Model (DOM), and CSS Grid before framework abstractions.</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-icon">🚀</div>
-            <h3 class="highlight-title">Future Ambition</h3>
-            <p class="highlight-desc">Aiming for software engineering internships and open-source contributions in modern systems.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         3. TECHNICAL SKILLS SECTION
-         Viva Tip: Responsive CSS Grid layout with interactive viva cheat-sheets.
-         ======================================================================= -->
-    <section id="skills" class="section-container">
-      <div class="section-header">
-        <span class="section-tag">// 02. TECHNICAL SKILLS</span>
-        <h2 class="section-title">My Tech Stack &amp; Tooling</h2>
-        <p class="section-subtitle">
-          Core technologies I use daily. Click any card's "Viva Defense Tip" to view potential viva exam talking points!
-        </p>
-      </div>
-
-      <div class="skills-grid">
-        <!-- C Language Card -->
-        <div class="glass-card skill-card">
-          <div class="skill-header">
-            <div class="skill-icon-wrapper">⚙️</div>
-            <span class="skill-badge">Foundational</span>
-          </div>
-          <h3 class="skill-title">C Programming</h3>
-          <p class="skill-desc">
-            Procedural programming, pointer arithmetic, manual memory management (`malloc`/`free`), and structured data.
-          </p>
-          <div class="skill-topics">
-            <span class="topic-tag">Pointers</span>
-            <span class="topic-tag">Structs</span>
-            <span class="topic-tag">Dynamic Memory</span>
-            <span class="topic-tag">File I/O</span>
-          </div>
-          <button class="viva-tip-btn" data-viva-topic="c" aria-label="View C Viva Notes">
-            💡 Viva Defense Points →
-          </button>
-        </div>
-
-        <!-- C++ Card -->
-        <div class="glass-card skill-card">
-          <div class="skill-header">
-            <div class="skill-icon-wrapper">🚀</div>
-            <span class="skill-badge">Core / DSA</span>
-          </div>
-          <h3 class="skill-title">C++ &amp; OOPs</h3>
-          <p class="skill-desc">
-            Object-Oriented Programming (Classes, Inheritance, Polymorphism) and Data Structures &amp; Algorithms using STL.
-          </p>
-          <div class="skill-topics">
-            <span class="topic-tag">OOP Concepts</span>
-            <span class="topic-tag">Vectors</span>
-            <span class="topic-tag">Maps &amp; Sets</span>
-            <span class="topic-tag">Time Complexity</span>
-          </div>
-          <button class="viva-tip-btn" data-viva-topic="cpp" aria-label="View C++ Viva Notes">
-            💡 Viva Defense Points →
-          </button>
-        </div>
-
-        <!-- JavaScript Card -->
-        <div class="glass-card skill-card">
-          <div class="skill-header">
-            <div class="skill-icon-wrapper">⚡</div>
-            <span class="skill-badge">Interactive Logic</span>
-          </div>
-          <h3 class="skill-title">JavaScript (ES6+)</h3>
-          <p class="skill-desc">
-            Modern vanilla JS, DOM manipulation, asynchronous programming, event handling, and HTML5 `localStorage` persistence.
-          </p>
-          <div class="skill-topics">
-            <span class="topic-tag">DOM API</span>
-            <span class="topic-tag">Event Loop</span>
-            <span class="topic-tag">LocalStorage</span>
-            <span class="topic-tag">Array Methods</span>
-          </div>
-          <button class="viva-tip-btn" data-viva-topic="js" aria-label="View JavaScript Viva Notes">
-            💡 Viva Defense Points →
-          </button>
-        </div>
-
-        <!-- HTML5 Card -->
-        <div class="glass-card skill-card">
-          <div class="skill-header">
-            <div class="skill-icon-wrapper">🌐</div>
-            <span class="skill-badge">Markup &amp; SEO</span>
-          </div>
-          <h3 class="skill-title">Semantic HTML5</h3>
-          <p class="skill-desc">
-            Structured semantic markup, accessibility (ARIA attributes), web forms with client-side validation, and SEO best practices.
-          </p>
-          <div class="skill-topics">
-            <span class="topic-tag">Semantic Tags</span>
-            <span class="topic-tag">Web Forms</span>
-            <span class="topic-tag">Accessibility</span>
-            <span class="topic-tag">SEO Meta</span>
-          </div>
-          <button class="viva-tip-btn" data-viva-topic="html" aria-label="View HTML5 Viva Notes">
-            💡 Viva Defense Points →
-          </button>
-        </div>
-
-        <!-- CSS3 Card -->
-        <div class="glass-card skill-card">
-          <div class="skill-header">
-            <div class="skill-icon-wrapper">🎨</div>
-            <span class="skill-badge">Styling &amp; UX</span>
-          </div>
-          <h3 class="skill-title">CSS3 &amp; Responsive UI</h3>
-          <p class="skill-desc">
-            Modern responsive layouts using Flexbox, CSS Grid, custom properties (variables), glassmorphism, and micro-animations.
-          </p>
-          <div class="skill-topics">
-            <span class="topic-tag">Flexbox</span>
-            <span class="topic-tag">CSS Grid</span>
-            <span class="topic-tag">CSS Variables</span>
-            <span class="topic-tag">Keyframes</span>
-          </div>
-          <button class="viva-tip-btn" data-viva-topic="css" aria-label="View CSS3 Viva Notes">
-            💡 Viva Defense Points →
-          </button>
-        </div>
-
-        <!-- Git & GitHub Card -->
-        <div class="glass-card skill-card">
-          <div class="skill-header">
-            <div class="skill-icon-wrapper">🐙</div>
-            <span class="skill-badge">Tooling</span>
-          </div>
-          <h3 class="skill-title">Git &amp; Version Control</h3>
-          <p class="skill-desc">
-            Version control workflow, tracking commits, branching, merging, conflict resolution, and publishing code to GitHub repositories.
-          </p>
-          <div class="skill-topics">
-            <span class="topic-tag">Git Commits</span>
-            <span class="topic-tag">Branching</span>
-            <span class="topic-tag">Merge Logic</span>
-            <span class="topic-tag">GitHub Hosting</span>
-          </div>
-          <button class="viva-tip-btn" data-viva-topic="git" aria-label="View Git Viva Notes">
-            💡 Viva Defense Points →
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- =======================================================================
-         4. THE "WOW FACTOR" MINI-PROJECT: STUDENT EXPENSE TRACKER
-         Viva Tip: This is an embedded, live interactive single-page application
-         built with 100% vanilla JavaScript. No external server needed.
-         ======================================================================= -->
-    <section id="projects" class="section-container">
-      <div class="section-header">
-        <span class="section-tag">// 03. THE "WOW FACTOR" MINI-PROJECT</span>
-        <h2 class="section-title">Live Student Expense &amp; Budget Tracker</h2>
-        <p class="section-subtitle">
-          A fully interactive, client-side financial manager embedded right inside my portfolio. Test it live below! All data persists across page refreshes via HTML5 <code>localStorage</code>.
-        </p>
-      </div>
-
-      <!-- Embedded Mini-Project UI Container -->
-      <div class="tracker-wrapper" id="expense-tracker-app">
-        <!-- Tracker Top Bar -->
-        <div class="tracker-header">
-          <div class="tracker-title-group">
-            <h3>💰 Student Budget Dashboard</h3>
-            <p class="tracker-subtitle">Manage college expenses, track semester savings, and visualize spending categories</p>
-          </div>
-          <div class="tracker-actions">
-            <button class="btn-sm btn-demo" id="btn-load-demo" title="Populate college student sample transactions">
-              📥 Load Student Demo Data
-            </button>
-            <button class="btn-sm btn-danger-outline" id="btn-clear-all" title="Wipe all transactions">
-              🗑️ Clear All Data
-            </button>
-          </div>
-        </div>
-
-        <!-- Summary Metric Cards -->
-        <div class="summary-grid">
-          <div class="metric-card">
-            <span class="metric-label">Total Net Balance</span>
-            <span class="metric-value balance" id="metric-balance">₹0.00</span>
-          </div>
-          <div class="metric-card">
-            <span class="metric-label">Total Income / Allowance</span>
-            <span class="metric-value income" id="metric-income">+ ₹0.00</span>
-          </div>
-          <div class="metric-card">
-            <span class="metric-label">Total Expenses</span>
-            <span class="metric-value expense" id="metric-expense">- ₹0.00</span>
-          </div>
-        </div>
-
-        <!-- Monthly Budget Progress Bar -->
-        <div class="budget-progress-container">
-          <div class="budget-header">
-            <span><strong>Monthly Allowance Budget:</strong> ₹8,000</span>
-            <span id="budget-spent-text" style="font-family: var(--font-mono); color: var(--accent-cyan);">₹0 / ₹8,000</span>
-          </div>
-          <div class="budget-track">
-            <div class="budget-bar" id="budget-progress-bar"></div>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">
-            <span id="budget-percent-text">0% of monthly limit used</span>
-            <span>Target: Maintain &lt; 85% for semester savings</span>
-          </div>
-        </div>
-
-        <!-- Tracker Main Layout: Form (Left) & Ledger (Right) -->
-        <div class="tracker-main-grid">
-          <!-- Add Transaction Form -->
-          <div class="transaction-form-box">
-            <h4 class="form-box-title">➕ Add New Transaction</h4>
-            
-            <form id="tracker-form">
-              <!-- Type Toggle Buttons -->
-              <div class="type-toggle-group">
-                <button type="button" class="type-btn active expense" id="btn-type-expense">
-                  Expense (-)
-                </button>
-                <button type="button" class="type-btn income" id="btn-type-income">
-                  Income (+)
-                </button>
-              </div>
-
-              <!-- Description Field -->
-              <div class="input-row" style="margin-top: 14px;">
-                <label for="tx-desc">Description / Item Name</label>
-                <input type="text" id="tx-desc" class="tracker-input" placeholder="e.g. C++ Programming Book, Canteen" required>
-              </div>
-
-              <!-- Amount & Category Row -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
-                <div class="input-row">
-                  <label for="tx-amount">Amount (₹)</label>
-                  <input type="number" id="tx-amount" class="tracker-input" placeholder="e.g. 250" step="any" min="1" required>
+        <div class="about-grid">
+          <!-- Bio Story Column -->
+          <div class="about-text">
+            <div class="terminal-window">
+              <div class="window-header">
+                <div class="window-controls">
+                  <span class="control-dot close"></span>
+                  <span class="control-dot minimize"></span>
+                  <span class="control-dot maximize"></span>
                 </div>
-                <div class="input-row">
-                  <label for="tx-category">Category</label>
-                  <select id="tx-category" class="tracker-select">
-                    <option value="food">🍔 Food &amp; Canteen</option>
-                    <option value="education">📚 Books &amp; Study</option>
-                    <option value="tech">💻 Tech &amp; Gadgets</option>
-                    <option value="transport">🚌 Bus &amp; Metro</option>
-                    <option value="entertainment">🎮 Outing &amp; Fun</option>
-                    <option value="other">📦 Other / Allowance</option>
-                  </select>
+                <span class="window-title">bio_manifesto.md</span>
+                <span class="window-badge">UTF-8</span>
+              </div>
+              <div class="window-body">
+                <p>
+                  I am a passionate <strong>1st-year B.Tech Computer Science &amp; Engineering student</strong> 
+                  fascinated by how computers execute instructions from the processor register level up to full-stack web applications.
+                </p>
+                <p>
+                  My engineering journey began with the rigorous study of structured programming in <strong>C and C++</strong>, where I mastered pointers, manual memory management, structs, and object-oriented abstractions. Simultaneously, I developed a passion for frontend engineering, utilizing clean <strong>Vanilla HTML5, modern CSS3, and JavaScript (ES6+)</strong> to build responsive, accessible, and fast web tools without reliance on bloated frameworks.
+                </p>
+                <div class="code-quote">
+                  "const engineeringMindset = { curiosity: Infinity, logic: 'Structured', persistUntilWorking: true };"
+                </div>
+                <p>
+                  Outside the classroom, I enjoy participating in collegiate hackathons, practicing algorithmic problems, and architecting interactive web applications like the embedded budget tracker below.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic Metrics & Coursework Column -->
+          <div class="about-sidebar">
+            <div class="about-stats">
+              <div class="stat-box">
+                <div class="stat-number">1st</div>
+                <div class="stat-label">Year B.Tech CSE</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Languages &amp; Tools</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Vanilla JS / CSS</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">25+</div>
+                <div class="stat-label">DSA Code Problems</div>
+              </div>
+            </div>
+
+            <!-- Current University Coursework -->
+            <div class="coursework-container terminal-window">
+              <div class="window-header">
+                <span class="window-title">current_coursework.cfg</span>
+              </div>
+              <div class="window-body">
+                <p class="coursework-title">Key Academic Modules:</p>
+                <div class="badges-flex">
+                  <span class="badge">Programming in C</span>
+                  <span class="badge">OOP in C++</span>
+                  <span class="badge">Data Structures</span>
+                  <span class="badge">Web Dev Basics</span>
+                  <span class="badge">Discrete Mathematics</span>
+                  <span class="badge">Digital Electronics</span>
+                  <span class="badge">Computer Organization</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------------
+         3. SKILLS SECTION
+         Viva Explanation:
+         - Visual grid categorizing core competencies into Languages, Web, and Tools.
+         - Uses progress meters and plain-English tooltips for viva defense.
+         ------------------------------------------------------------------- -->
+    <section id="skills" class="section-padding">
+      <div class="container">
+        
+        <header class="section-header">
+          <div class="section-command">
+            <span class="prompt-symbol">$</span>
+            <span>systeminfo --list-capabilities</span>
+          </div>
+          <h2 class="section-title">03. Technical Skills</h2>
+          <p class="section-subtitle">// Current engineering stack and proficiency metrics</p>
+        </header>
+
+        <div class="skills-grid">
+
+          <!-- Category 1: Programming Languages -->
+          <article class="skill-card">
+            <div class="skill-category-header">
+              <span class="skill-category-icon">&lt;/&gt;</span>
+              <h3 class="skill-category-title">Programming Languages</h3>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>C Language</strong> (Core)</span>
+                <span class="skill-level-text">Proficient [85%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+              <p class="skill-subtext">Pointers, dynamic allocation (`malloc/free`), structs, file I/O.</p>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>C++</strong> (OOP)</span>
+                <span class="skill-level-text">Proficient [80%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+              <p class="skill-subtext">Classes, inheritance, polymorphism, STL vectors &amp; algorithms.</p>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>JavaScript</strong> (ES6+)</span>
+                <span class="skill-level-text">Intermediate [78%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 78%;"></div></div>
+              <p class="skill-subtext">DOM APIs, event loops, array methods (`filter`, `reduce`), LocalStorage.</p>
+            </div>
+          </article>
+
+          <!-- Category 2: Web Technologies -->
+          <article class="skill-card">
+            <div class="skill-category-header">
+              <span class="skill-category-icon">&#9881;</span>
+              <h3 class="skill-category-title">Web Technologies</h3>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>HTML5</strong> (Semantic)</span>
+                <span class="skill-level-text">Advanced [90%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+              <p class="skill-subtext">Semantic tags, accessible forms, meta SEO tags, clean structure.</p>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>CSS3</strong> (Modern)</span>
+                <span class="skill-level-text">Proficient [85%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+              <p class="skill-subtext">CSS Grid, Flexbox, custom variables, keyframes, responsive design.</p>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>Responsive UI Design</strong></span>
+                <span class="skill-level-text">Proficient [82%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 82%;"></div></div>
+              <p class="skill-subtext">Media queries, mobile-first layouts, glassmorphism, accessibility.</p>
+            </div>
+          </article>
+
+          <!-- Category 3: Developer Tools & CS Fundamentals -->
+          <article class="skill-card">
+            <div class="skill-category-header">
+              <span class="skill-category-icon">&#128736;</span>
+              <h3 class="skill-category-title">Tools &amp; CS Core</h3>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>Git &amp; GitHub</strong></span>
+                <span class="skill-level-text">Intermediate [75%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+              <p class="skill-subtext">Version control, commit hygiene, branching, remote repositories.</p>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>Data Structures Basics</strong></span>
+                <span class="skill-level-text">Active Study [70%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 70%;"></div></div>
+              <p class="skill-subtext">Arrays, Linked Lists, Stacks, Queues, Time Complexity Big-O.</p>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name"><strong>Command Line / GCC</strong></span>
+                <span class="skill-level-text">Intermediate [75%]</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+              <p class="skill-subtext">Bash scripting, compilation flags (`-Wall -Wextra`), file redirection.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------------------
+         4. PROJECTS SECTION (FEATURING THE EMBEDDED MINI-PROJECT)
+         Viva Explanation:
+         - CRITICAL REQUIREMENT: Hosts a fully functional embedded mini-project:
+           Personal Expense Tracker ("Terminal Budget Engine v1.0").
+         - Examiners can perform live CRUD operations, filter data, and inspect
+           localStorage persistence without leaving the portfolio.
+         ------------------------------------------------------------------- -->
+    <section id="projects" class="section-padding">
+      <div class="container">
+        
+        <header class="section-header">
+          <div class="section-command">
+            <span class="prompt-symbol">$</span>
+            <span>./run_embedded_applications.sh --target=tracker</span>
+          </div>
+          <h2 class="section-title">04. Featured Projects</h2>
+          <p class="section-subtitle">// Interactive applications built with clean Vanilla HTML/CSS/JS</p>
+        </header>
+
+        <div class="projects-container">
+
+          <!-- EMBEDDED MINI-PROJECT: PERSONAL EXPENSE TRACKER -->
+          <article class="tracker-window" id="mini-project-tracker">
+            <div class="window-header">
+              <div class="window-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot minimize"></span>
+                <span class="control-dot maximize"></span>
+              </div>
+              <span class="window-title">terminal_budget_engine_v1.0.js (LIVE EMBEDDED MINI-PROJECT)</span>
+              <span class="tracker-badge">ACTIVE EXECUTION</span>
+            </div>
+
+            <div class="tracker-layout">
+
+              <!-- Top Metrics Overview Dashboard -->
+              <div class="tracker-summary-grid">
+                <div class="summary-card balance">
+                  <span class="summary-title">// Current Net Balance</span>
+                  <span class="summary-amount cyan" id="tracker-balance">₹0.00</span>
+                </div>
+                <div class="summary-card income">
+                  <span class="summary-title">// Total Income (+)</span>
+                  <span class="summary-amount green" id="tracker-income">+₹0.00</span>
+                </div>
+                <div class="summary-card expense">
+                  <span class="summary-title">// Total Expenses (-)</span>
+                  <span class="summary-amount red" id="tracker-expense">-₹0.00</span>
                 </div>
               </div>
 
-              <!-- Date Field -->
-              <div class="input-row" style="margin-top: 12px;">
-                <label for="tx-date">Date</label>
-                <input type="date" id="tx-date" class="tracker-input">
-              </div>
+              <!-- Main Tracker Work Area: Form (Left) vs Transaction List (Right) -->
+              <div class="tracker-main-grid">
 
-              <button type="submit" class="btn btn-primary" id="btn-add-tx" style="width: 100%; margin-top: 18px;">
-                Add Transaction
-              </button>
-            </form>
-          </div>
+                <!-- Left: Form to record transaction -->
+                <div class="tracker-form-card">
+                  <h3 class="form-header-title">
+                    <span class="prompt-symbol">&gt;</span> Log New Transaction
+                  </h3>
 
-          <!-- Transaction Ledger & Filters -->
-          <div class="ledger-box">
-            <div class="ledger-header">
-              <h4 class="form-box-title">📜 Transaction Ledger</h4>
-              <div class="ledger-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="expense">Expenses</button>
-                <button class="filter-btn" data-filter="income">Income</button>
+                  <form id="tracker-form">
+                    <div class="form-group">
+                      <label for="tracker-desc" class="form-label">Description / Item Name:</label>
+                      <input type="text" id="tracker-desc" class="form-input" placeholder="e.g. C++ Textbook, Hostel Food" required>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label for="tracker-amount" class="form-label">Amount (₹):</label>
+                        <input type="number" id="tracker-amount" class="form-input" placeholder="e.g. 450" min="1" step="any" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="tracker-type" class="form-label">Type:</label>
+                        <select id="tracker-type" class="form-select">
+                          <option value="expense">Expense (-)</option>
+                          <option value="income">Income (+)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="tracker-category" class="form-label">Category:</label>
+                      <select id="tracker-category" class="form-select">
+                        <option value="College">College &amp; Academics</option>
+                        <option value="Food">Food &amp; Canteen</option>
+                        <option value="Tech">Tech &amp; Hackathons</option>
+                        <option value="Allowance">Allowance &amp; Freelance</option>
+                        <option value="Transport">Transport &amp; Travel</option>
+                        <option value="Other">Miscellaneous</option>
+                      </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="tracker-submit-btn">
+                      <span>[ + Commit Transaction ]</span>
+                    </button>
+                  </form>
+                </div>
+
+                <!-- Right: Interactive History List & Category Filter -->
+                <div class="tracker-history-card">
+                  <div class="history-header">
+                    <h3 class="form-header-title" style="margin-bottom:0; padding-bottom:0; border:none;">
+                      <span class="prompt-symbol">&gt;</span> Ledger History
+                    </h3>
+
+                    <!-- Dynamic Category Filter -->
+                    <div class="filter-group" aria-label="Filter transactions by category">
+                      <button type="button" class="filter-btn active" data-filter="All">All</button>
+                      <button type="button" class="filter-btn" data-filter="College">College</button>
+                      <button type="button" class="filter-btn" data-filter="Food">Food</button>
+                      <button type="button" class="filter-btn" data-filter="Tech">Tech</button>
+                      <button type="button" class="filter-btn" data-filter="Allowance">Allowance</button>
+                    </div>
+                  </div>
+
+                  <!-- Dynamic list injected by js/tracker.js -->
+                  <ul class="transactions-list" id="tracker-list" aria-live="polite">
+                    <!-- Javascript populates <li> items here -->
+                  </ul>
+
+                  <!-- Reset & Clear Utilities for Examiner Testing -->
+                  <div class="tracker-footer-actions">
+                    <button type="button" class="btn-small" id="tracker-reset-btn" title="Reload default student sample records">
+                      [ Reload Sample Data ]
+                    </button>
+                    <button type="button" class="btn-small danger" id="tracker-clear-btn" title="Clear all records from localStorage">
+                      [ Clear All ]
+                    </button>
+                  </div>
+                </div>
+
               </div>
             </div>
+          </article>
 
-            <!-- Dynamic Transaction Items Render Target -->
-            <ul class="transactions-list" id="transactions-list">
-              <!-- Rendered via js/project.js -->
-            </ul>
+          <!-- Additional Academic Projects Showcase -->
+          <div class="other-projects-grid">
 
-            <!-- Empty State -->
-            <div class="empty-ledger" id="empty-ledger" style="display: none;">
-              <span class="empty-icon">📂</span>
-              <p>No transactions found.</p>
-              <span style="font-size: 0.8rem;">Click "Load Student Demo Data" above to view live sample data!</span>
-            </div>
+            <article class="project-card">
+              <div>
+                <div class="project-card-header">
+                  <span class="prompt-symbol">// academic_project_01</span>
+                  <span class="project-badge">C++ / CLI</span>
+                </div>
+                <h3 class="project-title">Student Record Management System</h3>
+                <p class="project-desc">
+                  A high-performance C++ console application that manages university student records using Object-Oriented Programming (OOP) paradigms. Features binary file stream serialization (`fstream`) for persistent storage and binary search for O(log N) roll-number queries.
+                </p>
+              </div>
+              <div>
+                <div class="project-tech-tags">
+                  <span class="tech-tag">C++17</span>
+                  <span class="tech-tag">OOP</span>
+                  <span class="tech-tag">File Streams</span>
+                  <span class="tech-tag">Binary Search</span>
+                </div>
+                <span style="font-size: 0.8rem; color: var(--accent-green);">&gt; Academic Viva Distinction Award</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div>
+                <div class="project-card-header">
+                  <span class="prompt-symbol">// academic_project_02</span>
+                  <span class="project-badge">C Language</span>
+                </div>
+                <h3 class="project-title">Dynamic Matrix Math &amp; Linear Solver</h3>
+                <p class="project-desc">
+                  An algorithmic matrix calculator written in pure C. Employs dynamic 2D pointer allocation (`int**`), Gaussian elimination for solving systems of linear equations, and robust memory cleanup to avoid memory leaks verified via Valgrind.
+                </p>
+              </div>
+              <div>
+                <div class="project-tech-tags">
+                  <span class="tech-tag">C Language</span>
+                  <span class="tech-tag">Pointers</span>
+                  <span class="tech-tag">Memory Management</span>
+                  <span class="tech-tag">Linear Algebra</span>
+                </div>
+                <span style="font-size: 0.8rem; color: var(--accent-cyan);">&gt; 1st-Year Engineering Lab Assignment</span>
+              </div>
+            </article>
+
           </div>
+
         </div>
+      </div>
+    </section>
 
-        <!-- Category Distribution Analytics -->
-        <div class="analytics-section">
-          <h4 class="analytics-title">📊 Spending Distribution by Category</h4>
-          <div class="category-bars" id="category-bars">
-            <!-- Rendered dynamically by js/project.js -->
+    <!-- -------------------------------------------------------------------
+         5. CONTACT SECTION (WITH JAVASCRIPT VALIDATION)
+         Viva Explanation:
+         - Fully functional client-side form with JavaScript validation.
+         - Intercepts submit event, verifies non-empty input, validates email regex,
+           and alerts user if fields are left blank.
+         ------------------------------------------------------------------- -->
+    <section id="contact" class="section-padding">
+      <div class="container">
+        
+        <header class="section-header">
+          <div class="section-command">
+            <span class="prompt-symbol">$</span>
+            <span>./dispatch_message.sh --recipient=dhruv</span>
           </div>
+          <h2 class="section-title">05. Contact Me</h2>
+          <p class="section-subtitle">// Get in touch for project collaborations, internships, or academic inquiries</p>
+        </header>
+
+        <div class="contact-grid">
+
+          <!-- Left: Contact Details & Terminal Status -->
+          <div class="contact-info-card">
+            <h3 class="form-header-title">
+              <span class="prompt-symbol">&gt;</span> Connection Details
+            </h3>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">&#9993;</div>
+              <div>
+                <div class="contact-info-label">Email Address</div>
+                <div class="contact-info-val">dhruv.gupta.dev@example.com</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">&#127891;</div>
+              <div>
+                <div class="contact-info-label">Institution &amp; Program</div>
+                <div class="contact-info-val">B.Tech in Computer Science &amp; Engineering</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">&#128205;</div>
+              <div>
+                <div class="contact-info-label">Current Academic Standing</div>
+                <div class="contact-info-val">1st Year Undergraduate (Freshman)</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">&#128279;</div>
+              <div>
+                <div class="contact-info-label">Developer Profiles</div>
+                <div class="contact-info-val" style="display: flex; gap: 0.8rem; margin-top: 0.3rem;">
+                  <span class="badge">github.com/dhruv</span>
+                  <span class="badge">linkedin.com/in/dhruv</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="code-quote" style="margin-top: 2rem;">
+              // Note to Examiners:<br>
+              Form submissions are checked via strict client-side JavaScript regex before dispatch!
+            </div>
+          </div>
+
+          <!-- Right: Interactive Contact Form with Strict JS Validation -->
+          <div class="contact-form-window">
+            <div class="window-header">
+              <div class="window-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot minimize"></span>
+                <span class="control-dot maximize"></span>
+              </div>
+              <span class="window-title">contact_form.sh</span>
+              <span class="window-badge">POST API Mock</span>
+            </div>
+
+            <div class="contact-form-body">
+              <!-- Validation Alert Banner -->
+              <div id="contact-banner" class="validation-banner" role="alert" aria-live="assertive"></div>
+
+              <form id="contact-form" novalidate>
+                <!-- novalidate attribute lets our custom JavaScript validation take precedence -->
+
+                <!-- Name Field -->
+                <div class="form-group">
+                  <label for="contact-name" class="form-label">Full Name: <span style="color:var(--accent-red)">*</span></label>
+                  <input type="text" id="contact-name" class="form-input" placeholder="e.g. Professor Sharma" autocomplete="name">
+                  <div id="contact-name-error" class="field-error-msg" aria-live="polite"></div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                  <label for="contact-email" class="form-label">Email Address: <span style="color:var(--accent-red)">*</span></label>
+                  <input type="email" id="contact-email" class="form-input" placeholder="e.g. sharma@university.edu" autocomplete="email">
+                  <div id="contact-email-error" class="field-error-msg" aria-live="polite"></div>
+                </div>
+
+                <!-- Subject Field -->
+                <div class="form-group">
+                  <label for="contact-subject" class="form-label">Subject: <span style="color:var(--accent-red)">*</span></label>
+                  <input type="text" id="contact-subject" class="form-input" placeholder="e.g. Final Web Development Evaluation">
+                  <div id="contact-subject-error" class="field-error-msg" aria-live="polite"></div>
+                </div>
+
+                <!-- Message Field -->
+                <div class="form-group">
+                  <label for="contact-message" class="form-label">Message: <span style="color:var(--accent-red)">*</span></label>
+                  <textarea id="contact-message" class="form-textarea" rows="4" placeholder="Enter your detailed message here (minimum 10 characters)..."></textarea>
+                  <div id="contact-message-error" class="field-error-msg" aria-live="polite"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" id="contact-submit-btn">
+                  <span>[ ./transmit_message.sh ]</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- =======================================================================
-         5. CONTACT SECTION WITH JAVASCRIPT VALIDATION
-         Viva Tip: We prevent empty or invalid submissions completely on client-side
-         with Regex email verification and friendly inline error spans.
-         ======================================================================= -->
-    <section id="contact" class="section-container">
-      <div class="section-header">
-        <span class="section-tag">// 04. GET IN TOUCH</span>
-        <h2 class="section-title">Let's Connect &amp; Collaborate</h2>
-        <p class="section-subtitle">
-          Have an opportunity, question about this assignment, or want to collaborate on a hackathon? Drop a message!
-        </p>
-      </div>
-
-      <div class="contact-grid">
-        <!-- Contact Information Card -->
-        <div class="glass-card contact-info-card">
-          <h3 style="font-size: 1.4rem;">Student Developer Info</h3>
-          <p style="color: var(--text-secondary); font-size: 0.95rem;">
-            I am currently open to hackathon teams, first-year developer communities, and collaborative open-source projects.
-          </p>
-
-          <div class="contact-details">
-            <div class="contact-item">
-              <div class="contact-icon">📧</div>
-              <div>
-                <span class="contact-label">Email</span>
-                <p class="contact-value">dhruv.gupta.dev@example.com</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">📍</div>
-              <div>
-                <span class="contact-label">Location</span>
-                <p class="contact-value">New Delhi, India (B.Tech Campus)</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">🎓</div>
-              <div>
-                <span class="contact-label">Education</span>
-                <p class="contact-value">B.Tech in Computer Science &amp; Eng.</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">🐙</div>
-              <div>
-                <span class="contact-label">Code Repository</span>
-                <p class="contact-value">github.com/dhruvgupta-portfolio</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Contact Form with JavaScript Validation -->
-        <div class="glass-card contact-form">
-          <h3 style="font-size: 1.4rem;">Send a Direct Message</h3>
-          
-          <form id="contact-form" novalidate>
-            <!-- Full Name -->
-            <div class="form-group">
-              <label for="contact-name" class="form-label">
-                <span>Your Name</span>
-                <span class="req">*</span>
-              </label>
-              <input type="text" id="contact-name" class="form-input" placeholder="e.g. Professor Sharma or Student Peer">
-              <span class="error-text" id="name-error"></span>
-            </div>
-
-            <!-- Email Address -->
-            <div class="form-group">
-              <label for="contact-email" class="form-label">
-                <span>Your Email Address</span>
-                <span class="req">*</span>
-              </label>
-              <input type="email" id="contact-email" class="form-input" placeholder="e.g. yourname@university.edu">
-              <span class="error-text" id="email-error"></span>
-            </div>
-
-            <!-- Subject -->
-            <div class="form-group">
-              <label for="contact-subject" class="form-label">
-                <span>Subject</span>
-                <span class="req">*</span>
-              </label>
-              <input type="text" id="contact-subject" class="form-input" placeholder="e.g. Web Development Assignment Review">
-              <span class="error-text" id="subject-error"></span>
-            </div>
-
-            <!-- Message Body -->
-            <div class="form-group">
-              <label for="contact-message" class="form-label">
-                <span>Message</span>
-                <span class="req">*</span>
-              </label>
-              <textarea id="contact-message" class="form-textarea" placeholder="Type your message here..."></textarea>
-              <span class="error-text" id="message-error"></span>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary" id="btn-submit-contact" style="width: 100%;">
-              <span>Send Message</span>
-              <span>✈️</span>
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <!-- =========================================================================
-       FOOTER
-       ========================================================================= -->
-  <footer class="footer">
-<<<<<<< HEAD
-    <div class="footer-content">
-      <div class="footer-badge">
-        Crafted with 100% Vanilla HTML5, CSS3 &amp; JavaScript
+  <!-- =====================================================================
+       FOOTER: TERMINAL STATUS LINE
+       Viva Explanation:
+       - Styled like a Linux command bar (Vim / tmux status line).
+       - Shows encoding, execution status, and copyright.
+       ===================================================================== -->
+  <footer class="terminal-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <span>&copy; 2026 <strong>Dhruv Gupta</strong>. Built with Vanilla HTML5, CSS3 &amp; JavaScript.</span>
+        </div>
+        <div class="footer-status-pills">
+          <span class="footer-pill online">STATUS: OK (200)</span>
+          <span class="footer-pill">BRANCH: 1st-Year CSE</span>
+          <span class="footer-pill">ENCODING: UTF-8</span>
+        </div>
       </div>
-      <p>
-        © 2026 Dhruv Gupta • 1st Year B.Tech Computer Science &amp; Engineering. All rights reserved.
-      </p>
-      <p style="font-size: 0.8rem; color: var(--text-muted);">
-        Designed for academic web development milestone &amp; viva evaluation.
-      </p>
-=======
-    <div class="container footer-box">
-      <p>&copy; 2026 Dhruv Gupta. Built with HTML, CSS, and JavaScript.</p>
->>>>>>> 19e46291b53562c9d87ab87af55d716b11692ed8
     </div>
   </footer>
 
-  <!-- Back to Top Button -->
-  <button id="back-to-top" class="back-to-top" aria-label="Back to Top" title="Back to Top">
-    ↑
-  </button>
-
-  <!-- Toast Notification Container -->
-  <div id="toast-container" class="toast-container" aria-live="polite"></div>
-
-  <!-- Viva Defense Interactive Modal -->
-  <div id="viva-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:3000; align-items:center; justify-content:center; padding:20px;">
-    <div class="glass-card" style="max-width:550px; width:100%; padding:32px; position:relative; background:#0f172a; border-color:var(--accent-cyan);">
-      <button id="close-viva-modal" style="position:absolute; top:16px; right:16px; background:none; border:none; color:var(--text-muted); font-size:1.5rem; cursor:pointer;" aria-label="Close modal">×</button>
-      <h3 id="viva-modal-title" style="color:var(--accent-cyan); margin-bottom:16px; font-size:1.4rem;">Viva Defense Points</h3>
-      <div id="viva-modal-body" style="color:var(--text-secondary); line-height:1.7; font-size:0.95rem;"></div>
-      <div style="margin-top:24px; text-align:right;">
-        <button onclick="document.getElementById('viva-modal').style.display='none'" class="btn btn-primary btn-sm">Understood!</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Project & Main JavaScript Files -->
-  <script src="js/project.js"></script>
+  <!-- =====================================================================
+       SCRIPTS
+       Viva Explanation:
+       - Placed right before </body> to ensure HTML elements are fully parsed
+         before JavaScript executes (improves First Contentful Paint).
+       ===================================================================== -->
   <script src="js/main.js"></script>
+  <script src="js/tracker.js"></script>
 </body>
 </html>

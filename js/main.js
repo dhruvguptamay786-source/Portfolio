@@ -1,360 +1,333 @@
-/**
- * ==========================================================================
- * MAIN PORTFOLIO JAVASCRIPT
- * --------------------------------------------------------------------------
- * VIVA DEFENSE GUIDE & ARCHITECTURE OVERVIEW:
- * 1. DOM Traversal: Using `document.getElementById` and `document.querySelector`
- * 2. Asynchronous Timing: `setTimeout` and recursion for the Typing Effect
- * 3. Event Handling: Click events, form submit prevention with `e.preventDefault()`
- * 4. Regular Expressions (RegEx): Pattern matching for strict email format validation
- * 5. ScrollSpy & UI Polish: Dynamic navbar states and Back-to-Top button
- * ==========================================================================
- */
+/* ==========================================================================
+   PORTFOLIO MAIN JAVASCRIPT LOGIC
+   Student: Dhruv Gupta (1st Year B.Tech CSE)
+   Viva Explanation:
+   This file implements core client-side interactivity using Vanilla JavaScript:
+   1. Dynamic Typing Effect: Custom typewriter animation cycling through career titles.
+   2. IntersectionObserver API: Automatically highlights active navbar links on scroll.
+   3. Strict Form Validation: Validates all contact inputs, prevents empty submissions,
+      and gives instant visual feedback.
+   4. Global Toast System: Clean terminal-styled feedback toasts for UI events.
+   5. Mobile Navigation: Responsive drawer menu toggle.
+   ========================================================================== */
 
-// Global Toast helper accessible everywhere
-window.showToast = function(message, type = 'info') {
-  const container = document.getElementById('toast-container');
-  if (!container) return;
+/* --------------------------------------------------------------------------
+   1. GLOBAL TOAST NOTIFICATION SYSTEM
+   Viva Note: Attached to 'window' so both main.js and tracker.js can call it.
+   Creates or reuses a floating terminal toast element at the bottom-right.
+   -------------------------------------------------------------------------- */
+window.showToast = function (message, type = "info") {
+  let toast = document.getElementById("terminal-toast");
 
-  const toast = document.createElement('div');
-  toast.className = `toast toast-${type}`;
-  
-  const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
-  toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
-  
-  container.appendChild(toast);
+  // Create toast element if it doesn't already exist in the DOM
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "terminal-toast";
+    toast.className = "terminal-toast";
+    document.body.appendChild(toast);
+  }
 
-  // Automatically remove toast after 4 seconds with fade out
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateX(100%)';
-    toast.style.transition = 'all 0.3s ease';
-    setTimeout(() => toast.remove(), 300);
-  }, 4000);
+  // Set message text and styling based on notification type
+  const prefix = type === "error" ? "[ERROR]" : type === "success" ? "[SUCCESS]" : "[INFO]";
+  toast.innerHTML = `<span style="font-weight:bold; color: ${type === 'error' ? 'var(--accent-red)' : type === 'success' ? 'var(--accent-green)' : 'var(--accent-cyan)'};">${prefix}</span> <span>${message}</span>`;
+
+  // Toggle modifier classes
+  toast.classList.remove("error-toast", "show");
+  if (type === "error") {
+    toast.classList.add("error-toast");
+  }
+
+  // Force DOM reflow to retrigger animation
+  void toast.offsetWidth;
+  toast.classList.add("show");
+
+  // Automatically dismiss toast after 3.5 seconds
+  if (window.toastTimeout) {
+    clearTimeout(window.toastTimeout);
+  }
+  window.toastTimeout = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3500);
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  initTypingEffect();
-  initContactFormValidation();
-  initNavbarScroll();
-  initMobileNav();
-  initBackToTop();
-  initVivaNotesModal();
-});
+// Execute interactive logic once the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function () {
 
-/**
- * ==========================================================================
- * VIVA DEFENSE NOTE #15: Hero Section Dynamic Typing Animation
- * WHY WE USE THIS:
- * - We cycle through an array of professional engineering titles.
- * - By manipulating `substring(0, charIndex)` at timed intervals using `setTimeout`,
- *   we simulate a real terminal typing and backspacing effect without heavy libraries!
- * ==========================================================================
- */
-function initTypingEffect() {
-  const typingElement = document.getElementById('typing-text');
-  if (!typingElement) return;
+  /* ------------------------------------------------------------------------
+     2. DYNAMIC TYPING EFFECT (HERO SECTION)
+     Viva Note:
+     - Simulates human typing in a terminal using recursive setTimeout calls.
+     - Words array contains student roles.
+     - Handles state machine: TYPING -> PAUSING -> DELETING -> NEXT WORD.
+     ------------------------------------------------------------------------ */
+  const typedTextElement = document.getElementById("typed-text");
+  
+  if (typedTextElement) {
+    const roles = [
+      "1st-Year B.Tech CSE Student",
+      "C & C++ Programming Explorer",
+      "Vanilla Web Developer",
+      "Algorithmic Problem Solver"
+    ];
 
-  const words = [
-    '1st Year B.Tech CSE Student',
-    'C / C++ & DSA Enthusiast',
-    'Vanilla Web Developer',
-    'Aspiring Software Engineer'
-  ];
+    let roleIndex = 0;       // Current phrase in the roles array
+    let charIndex = 0;       // Current character position within the phrase
+    let isDeleting = false;  // Whether currently deleting characters
+    let typingSpeed = 90;    // Milliseconds between character insertions
 
-  let wordIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  const typeSpeed = 90;
-  const deleteSpeed = 45;
-  const pauseEnd = 1600;
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
 
-  function type() {
-    const currentWord = words[wordIndex];
+      if (isDeleting) {
+        // Deleting characters: slice string up to charIndex
+        typedTextElement.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 45; // Deleting is faster than typing
+      } else {
+        // Typing characters: slice string up to charIndex
+        typedTextElement.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 85;
+      }
 
-    if (isDeleting) {
-      typingElement.textContent = currentWord.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      typingElement.textContent = currentWord.substring(0, charIndex + 1);
-      charIndex++;
+      // If word is completely typed
+      if (!isDeleting && charIndex === currentRole.length) {
+        // Pause at full text before starting deletion
+        typingSpeed = 1600;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        // Word is completely deleted: move to the next phrase
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length; // Modulo wraps around cleanly
+        typingSpeed = 400; // Short pause before typing next word
+      }
+
+      // Schedule next character update
+      setTimeout(typeEffect, typingSpeed);
     }
 
-    let delay = isDeleting ? deleteSpeed : typeSpeed;
-
-    // Word finished typing
-    if (!isDeleting && charIndex === currentWord.length) {
-      delay = pauseEnd;
-      isDeleting = true;
-    } 
-    // Word finished deleting
-    else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      wordIndex = (wordIndex + 1) % words.length; // Loop back to start
-      delay = 400;
-    }
-
-    setTimeout(type, delay);
+    // Start typing loop
+    setTimeout(typeEffect, 500);
   }
 
-  // Start the typing loop
-  setTimeout(type, 800);
-}
+  /* ------------------------------------------------------------------------
+     3. MOBILE NAVIGATION DRAWER
+     Viva Note: Toggles '.open' class on the navigation links container when
+     the mobile hamburger button is clicked.
+     ------------------------------------------------------------------------ */
+  const navToggle = document.getElementById("nav-toggle");
+  const navLinks = document.getElementById("nav-links");
+  const allNavLinks = document.querySelectorAll(".nav-link");
 
-/**
- * ==========================================================================
- * VIVA DEFENSE NOTE #16: Contact Form Validation & Regex
- * WHY WE USE THIS:
- * - Prevents blank submissions and malformed data from reaching any backend.
- * - Regular Expression (Regex) ensures the email string follows standard format:
- *   [username] @ [domain] . [tld]
- * - Inline feedback improves accessibility and user experience (UX).
- * ==========================================================================
- */
-function initContactFormValidation() {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
-
-  const nameInput = document.getElementById('contact-name');
-  const emailInput = document.getElementById('contact-email');
-  const subjectInput = document.getElementById('contact-subject');
-  const messageInput = document.getElementById('contact-message');
-
-  const nameError = document.getElementById('name-error');
-  const emailError = document.getElementById('email-error');
-  const subjectError = document.getElementById('subject-error');
-  const messageError = document.getElementById('message-error');
-
-  // Standard RFC 5322 compatible simplified email regex pattern
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // Real-time input clearing of errors when user starts typing
-  [nameInput, emailInput, subjectInput, messageInput].forEach(input => {
-    if (!input) return;
-    input.addEventListener('input', () => {
-      input.classList.remove('input-error');
-      const errSpan = document.getElementById(`${input.id.replace('contact-', '')}-error`);
-      if (errSpan) errSpan.textContent = '';
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", function () {
+      navLinks.classList.toggle("open");
+      const isOpen = navLinks.classList.contains("open");
+      navToggle.textContent = isOpen ? "[X] Close" : "[=] Menu";
     });
-  });
 
-  form.addEventListener('submit', (e) => {
-    // 1. Prevent default form submission (browser page reload)
-    e.preventDefault();
-
-    let isValid = true;
-
-    // Validate Name (Required, minimum 2 characters)
-    const nameVal = nameInput.value.trim();
-    if (!nameVal) {
-      showFieldError(nameInput, nameError, 'Full name is required.');
-      isValid = false;
-    } else if (nameVal.length < 2) {
-      showFieldError(nameInput, nameError, 'Name must be at least 2 characters.');
-      isValid = false;
-    }
-
-    // Validate Email (Required, must match Regex)
-    const emailVal = emailInput.value.trim();
-    if (!emailVal) {
-      showFieldError(emailInput, emailError, 'Email address is required.');
-      isValid = false;
-    } else if (!emailRegex.test(emailVal)) {
-      showFieldError(emailInput, emailError, 'Please enter a valid email (e.g. name@domain.com).');
-      isValid = false;
-    }
-
-    // Validate Subject (Required, minimum 3 characters)
-    const subjectVal = subjectInput.value.trim();
-    if (!subjectVal) {
-      showFieldError(subjectInput, subjectError, 'Please provide a subject line.');
-      isValid = false;
-    } else if (subjectVal.length < 3) {
-      showFieldError(subjectInput, subjectError, 'Subject must be at least 3 characters.');
-      isValid = false;
-    }
-
-    // Validate Message (Required, minimum 10 characters)
-    const messageVal = messageInput.value.trim();
-    if (!messageVal) {
-      showFieldError(messageInput, messageError, 'Message body cannot be empty.');
-      isValid = false;
-    } else if (messageVal.length < 10) {
-      showFieldError(messageInput, messageError, 'Message must be at least 10 characters long.');
-      isValid = false;
-    }
-
-    // If any validation failed, abort submission
-    if (!isValid) {
-      showToast('Please fix the highlighted errors in the form.', 'error');
-      return;
-    }
-
-    // Successful Form Submission Simulation
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = 'Sending... ⏳';
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-      // Show success toast
-      showToast(`Thank you, ${nameVal}! Your message has been sent successfully.`, 'success');
-
-      // Clear input fields
-      form.reset();
-
-      // Reset submit button
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-    }, 1000);
-  });
-
-  function showFieldError(inputEl, errorEl, message) {
-    if (inputEl) inputEl.classList.add('input-error');
-    if (errorEl) errorEl.textContent = message;
+    // Auto-close menu when a link is clicked on mobile
+    allNavLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        if (navLinks.classList.contains("open")) {
+          navLinks.classList.remove("open");
+          navToggle.textContent = "[=] Menu";
+        }
+      });
+    });
   }
-}
 
-/**
- * ==========================================================================
- * VIVA DEFENSE NOTE #17: ScrollSpy & Active Link Highlighting
- * WHY WE USE THIS:
- * - As the user scrolls down through different sections, we calculate the
- *   current vertical scroll position and update the active navbar link!
- * ==========================================================================
- */
-function initNavbarScroll() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
+  /* ------------------------------------------------------------------------
+     4. ACTIVE NAVIGATION LINK ON SCROLL (INTERSECTION OBSERVER)
+     Viva Note:
+     - IntersectionObserver is modern browser API that detects when an element
+       is visible inside the viewport without expensive 'window.onscroll' handlers.
+     - Improves rendering performance by eliminating scroll event throttling.
+     ------------------------------------------------------------------------ */
+  const sections = document.querySelectorAll("section[id]");
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-      const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - 120;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        current = sectionId;
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
-      }
-    });
-  });
-}
-
-/**
- * Mobile Navigation Menu Toggle
- */
-function initMobileNav() {
-  const toggleBtn = document.getElementById('mobile-toggle');
-  const navLinks = document.getElementById('nav-links');
-
-  if (!toggleBtn || !navLinks) return;
-
-  toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
-
-  // Close menu when link clicked on mobile
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-    });
-  });
-}
-
-/**
- * Back-to-Top Button Behavior
- */
-function initBackToTop() {
-  const btn = document.getElementById('back-to-top');
-  if (!btn) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 400) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-}
-
-/**
- * Viva Defense Modal / Quick Explainers
- */
-function initVivaNotesModal() {
-  const modal = document.getElementById('viva-modal');
-  const closeBtn = document.getElementById('close-viva-modal');
-  const triggerBtns = document.querySelectorAll('.viva-tip-btn');
-  const modalTitle = document.getElementById('viva-modal-title');
-  const modalBody = document.getElementById('viva-modal-body');
-
-  if (!modal || !closeBtn) return;
-
-  // Viva cheat sheet data map
-  const vivaKnowledge = {
-    'c': {
-      title: 'C Language Viva Defense Points',
-      body: '<strong>Key Concepts:</strong> Pointers, Dynamic Memory Allocation (<code>malloc</code>, <code>free</code>), Stack vs Heap, Structures (<code>struct</code>).<br><br><strong>Why C for 1st Year:</strong> Teaches foundational memory management and how hardware communicates with code before moving to higher-level web abstractions.'
-    },
-    'cpp': {
-      title: 'C++ & OOP Viva Defense Points',
-      body: '<strong>Key Concepts:</strong> 4 Pillars of OOP (Encapsulation, Inheritance, Polymorphism, Abstraction), Classes & Objects, Constructors/Destructors, Standard Template Library (<code>vector</code>, <code>map</code>).<br><br><strong>Application:</strong> Fast algorithmic problem solving and low-latency system development.'
-    },
-    'js': {
-      title: 'JavaScript (ES6+) Viva Defense Points',
-      body: '<strong>Key Concepts:</strong> Event-driven architecture, Asynchronous execution (Event Loop, Callbacks, Promises), DOM API manipulation, LocalStorage API, and closures.<br><br><strong>Defense Answer:</strong> JavaScript runs in the browser engine (e.g. V8 in Chrome) and dynamically updates HTML without full-page refreshes.'
-    },
-    'html': {
-      title: 'Semantic HTML5 Viva Defense Points',
-      body: '<strong>Key Concepts:</strong> Semantic tags (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>) vs generic <code>&lt;div&gt;</code>.<br><br><strong>Importance:</strong> Enhances SEO, screen-reader accessibility, and clean code maintainability.'
-    },
-    'css': {
-      title: 'CSS3 Architecture & Layout Viva Points',
-      body: '<strong>Key Concepts:</strong> Flexbox (1-dimensional layout), CSS Grid (2-dimensional grid layout), Box-sizing: border-box, CSS Variables (<code>:root</code>), and Media Queries.<br><br><strong>Defense Answer:</strong> Vanilla CSS was chosen to master raw layout mechanics before relying on abstraction frameworks like Tailwind or Bootstrap.'
-    },
-    'git': {
-      title: 'Git & Version Control Viva Points',
-      body: '<strong>Key Concepts:</strong> Repositories, Working Directory vs Staging Area vs Local/Remote Commit Tree, Branching (<code>git checkout -b</code>), and merge conflict resolution.<br><br><strong>Defense Answer:</strong> Git tracks code revisions iteratively, allowing collaboration and rollbacks.'
-    }
+  const observerOptions = {
+    root: null,
+    rootMargin: "-20% 0px -70% 0px", // Trigger when section is in upper-mid viewport
+    threshold: 0
   };
 
-  triggerBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const topicKey = btn.getAttribute('data-viva-topic');
-      const data = vivaKnowledge[topicKey];
-
-      if (data && modalTitle && modalBody) {
-        modalTitle.textContent = data.title;
-        modalBody.innerHTML = data.body;
-        modal.style.display = 'flex';
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const activeId = entry.target.getAttribute("id");
+        allNavLinks.forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${activeId}`) {
+            link.classList.add("active");
+          }
+        });
       }
     });
-  });
+  }, observerOptions);
 
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+  sections.forEach(section => sectionObserver.observe(section));
 
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
+  /* ------------------------------------------------------------------------
+     5. CONTACT FORM STRICT CLIENT-SIDE VALIDATION
+     Viva Note:
+     - Form submission is intercepted via 'e.preventDefault()' to stop page reload.
+     - Validates:
+       1. Name: Must not be empty and must have at least 2 characters.
+       2. Email: Validated against standard Regular Expression (regex).
+       3. Subject: Must not be empty and must have at least 3 characters.
+       4. Message: Must not be empty and must have at least 10 characters.
+     - Prevents empty or malformed submissions with clear feedback banner and
+       inline field warnings.
+     ------------------------------------------------------------------------ */
+  const contactForm = document.getElementById("contact-form");
+  const bannerAlert = document.getElementById("contact-banner");
+
+  if (contactForm) {
+    const nameInput = document.getElementById("contact-name");
+    const emailInput = document.getElementById("contact-email");
+    const subjectInput = document.getElementById("contact-subject");
+    const messageInput = document.getElementById("contact-message");
+
+    // Regular Expression for standard email format
+    // Checks for characters before '@', domain characters, and valid TLD extension (.com, .in, etc.)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // Helper to display error state on an individual input element
+    function setFieldError(inputElement, errorMessage) {
+      inputElement.classList.add("is-invalid");
+      const errorMsgElement = document.getElementById(`${inputElement.id}-error`);
+      if (errorMsgElement) {
+        errorMsgElement.textContent = `> ${errorMessage}`;
+        errorMsgElement.classList.add("visible");
+      }
     }
-  });
-}
+
+    // Helper to clear error state on an individual input element
+    function clearFieldError(inputElement) {
+      inputElement.classList.remove("is-invalid");
+      const errorMsgElement = document.getElementById(`${inputElement.id}-error`);
+      if (errorMsgElement) {
+        errorMsgElement.textContent = "";
+        errorMsgElement.classList.remove("visible");
+      }
+    }
+
+    // Clear individual errors dynamically as user types
+    [nameInput, emailInput, subjectInput, messageInput].forEach(field => {
+      if (field) {
+        field.addEventListener("input", function () {
+          if (field.classList.contains("is-invalid")) {
+            clearFieldError(field);
+          }
+        });
+      }
+    });
+
+    // Form Submit Event Handler
+    contactForm.addEventListener("submit", function (e) {
+      // 1. CRITICAL: Stop standard HTML browser form submission
+      e.preventDefault();
+
+      // Reset previous error messages
+      [nameInput, emailInput, subjectInput, messageInput].forEach(clearFieldError);
+      bannerAlert.className = "validation-banner";
+      bannerAlert.innerHTML = "";
+
+      let isValid = true;
+      const errorList = [];
+
+      // Extract and trim user input values
+      const nameVal = nameInput.value.trim();
+      const emailVal = emailInput.value.trim();
+      const subjectVal = subjectInput.value.trim();
+      const messageVal = messageInput.value.trim();
+
+      // 2. Validate Name
+      if (nameVal === "") {
+        setFieldError(nameInput, "Name field cannot be left blank.");
+        errorList.push("Name is required");
+        isValid = false;
+      } else if (nameVal.length < 2) {
+        setFieldError(nameInput, "Name must contain at least 2 characters.");
+        errorList.push("Name is too short");
+        isValid = false;
+      }
+
+      // 3. Validate Email
+      if (emailVal === "") {
+        setFieldError(emailInput, "Email address cannot be empty.");
+        errorList.push("Email is required");
+        isValid = false;
+      } else if (!emailRegex.test(emailVal)) {
+        setFieldError(emailInput, "Please enter a valid email address (e.g. name@domain.com).");
+        errorList.push("Invalid email format");
+        isValid = false;
+      }
+
+      // 4. Validate Subject
+      if (subjectVal === "") {
+        setFieldError(subjectInput, "Subject field cannot be empty.");
+        errorList.push("Subject is required");
+        isValid = false;
+      } else if (subjectVal.length < 3) {
+        setFieldError(subjectInput, "Subject must contain at least 3 characters.");
+        errorList.push("Subject is too short");
+        isValid = false;
+      }
+
+      // 5. Validate Message Body
+      if (messageVal === "") {
+        setFieldError(messageInput, "Message body cannot be empty.");
+        errorList.push("Message cannot be empty");
+        isValid = false;
+      } else if (messageVal.length < 10) {
+        setFieldError(messageInput, "Please provide a message with at least 10 characters.");
+        errorList.push("Message too brief (<10 chars)");
+        isValid = false;
+      }
+
+      // 6. Handle Form State based on validation result
+      if (!isValid) {
+        // Show validation error banner
+        bannerAlert.className = "validation-banner error";
+        bannerAlert.innerHTML = `
+          <strong>[SUBMISSION REJECTED]:</strong> Please correct the ${errorList.length} highlighted error(s) before sending.
+        `;
+
+        // Focus first field with error
+        const firstErrorField = contactForm.querySelector(".is-invalid");
+        if (firstErrorField) {
+          firstErrorField.focus();
+        }
+
+        // Show floating error toast
+        window.showToast("Form validation failed. Please check required fields.", "error");
+        return;
+      }
+
+      // 7. Success State: Simulated dispatch
+      bannerAlert.className = "validation-banner success";
+      bannerAlert.innerHTML = `
+        <strong>[EXIT CODE 0]:</strong> Message dispatched successfully! Thank you, Dhruv will get back to you shortly.
+      `;
+
+      // Clear input fields
+      contactForm.reset();
+
+      // Show floating confirmation toast
+      window.showToast("Message sent successfully! (Exit Code: 0)", "success");
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     6. CONSOLE WELCOME GREETING
+     Viva Note: Demonstrates attention to detail for examiners opening
+     the browser developer tools console (F12).
+     ------------------------------------------------------------------------ */
+  console.log(
+    "%c[SYSTEM INITIALIZED]%c Dhruv Gupta's 1st-Year B.Tech CSE Portfolio is online.",
+    "color: #00ff66; font-weight: bold; background: #0a0e14; padding: 4px 8px; border-radius: 4px;",
+    "color: #00f0ff;"
+  );
+});
